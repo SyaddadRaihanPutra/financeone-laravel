@@ -3,6 +3,8 @@
 @section('title', 'Masuk Akun')
 @section('content')
     <div class="max-w-md py-32 mx-auto sm:py-30 lg:py-30">
+        <a href="{{ route('home') }}" class="flex items-center mb-3 text-slate-600">
+            <i class="ti ti-arrow-left"></i> &nbsp;Kembali ke Beranda </a>
         <div class="p-5 bg-white shadow-2xl rounded-xl ring-2 ring-gray-300">
             <h1 class="text-2xl font-bold text-center">Masuk Akun</h1>
             <form action="{{ route('login.store') }}" method="POST" class="mt-5" id="loginForm">
@@ -13,9 +15,6 @@
                         placeholder="syaddad@company.com"
                         class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                         required />
-                    @error('email')
-                        <p class="text-sm text-red-500">{{ $message }}</p>
-                    @enderror
                 </div>
 
                 <div class="mb-5">
@@ -33,15 +32,12 @@
                                 </label>
                             </div>
                             <div class="ml-auto">
-                                <a href="#"
+                                <a href="{{ route('password.request') }}"
                                     class="text-sm font-medium text-indigo-600 hover:text-indigo-700 focus:outline-none">Lupa
                                     kata sandi?</a>
                             </div>
                         </div>
                     </div>
-                    @error('password')
-                        <p class="text-sm text-red-500">{{ $message }}</p>
-                    @enderror
                 </div>
 
                 <div class="mt-4">
@@ -58,7 +54,7 @@
             </form>
             <h1 class="mt-3 text-center">atau</h1>
             <div class="mt-4">
-                <button type="button"
+                <a type="button" href="{{ route('google.login') }}"
                     class="inline-flex items-center justify-center w-full py-2 text-sm font-medium text-gray-800 transition-all bg-white border border-transparent rounded-md shadow-sm ring-gray-500 ring-1 hover:bg-white-700 focus:outline-none hover:shadow-xl">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -78,7 +74,7 @@
                         </svg>
                     </span>
                     Masuk dengan Google
-                </button>
+                </a>
             </div>
             <div class="mt-5 text-center">
                 <p class="text-sm text-gray-600">Belum punya akun?</p>

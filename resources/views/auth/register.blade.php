@@ -5,8 +5,30 @@
     <div class="max-w-md py-32 mx-auto sm:py-30 lg:py-30">
         <div class="p-5 bg-white shadow-2xl rounded-xl ring-2 ring-gray-300">
             <h1 class="text-2xl font-bold text-center">Daftar Akun</h1>
-            <form action="{{ route('login.store') }}" method="POST" class="mt-5" id="loginForm">
+            <form action="{{ route('register') }}" method="POST" class="mt-5" id="loginForm">
                 @csrf
+                <div class="mb-5">
+                    <label for="fullname" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                    <input type="text" id="fullname" name="fullname" value="{{ old('fullname') }}"
+                        placeholder="Syaddad Raihan Putra"
+                        class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required /> 
+                    @error('fullname')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-5">
+                    <label for="nickname" class="block text-sm font-medium text-gray-700">Nama Panggilan</label>
+                    <input type="text" id="nickname" name="nickname" value="{{ old('nickname') }}"
+                        placeholder="syaddad.dev"
+                        class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                        required />
+                    @error('nickname')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <div class="mb-5">
                     <label for="email" class="block text-sm font-medium text-gray-700">Alamat Surel</label>
                     <input type="email" id="email" name="email" value="{{ old('email') }}"
@@ -24,33 +46,44 @@
                         <input type="password" id="password" name="password" placeholder="********"
                             class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             required />
-                        <div class="flex items-center justify-between mt-3">
-                            <div>
-                                <input type="checkbox" id="remember"
-                                    class="mr-2 text-indigo-500 rounded-lg focus:ring-indigo-500" />
-                                <label for="remember" class="text-sm font-medium text-gray-600">
-                                    Ingat saya
-                                </label>
-                            </div>
-                            <div class="ml-auto">
-                                <a href="#"
-                                    class="text-sm font-medium text-indigo-600 hover:text-indigo-700 focus:outline-none">Lupa
-                                    kata sandi?</a>
-                            </div>
-                        </div>
                     </div>
                     @error('password')
                         <p class="text-sm text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
 
+                <div class="mb-5">
+                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Kata
+                        Sandi</label>
+                    <div class="relative">
+                        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="********"
+                            class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            required />
+                    </div>
+                    @error('password_confirmation')
+                        <p class="text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <input type="checkbox" id="remember" class="mr-2 text-indigo-500 rounded-lg focus:ring-indigo-500" />
+                    <label for="remember" class="text-sm font-medium text-gray-600">
+                        Saya setuju dengan <a href="#" class="text-indigo-600 hover:text-indigo-700">Syarat dan
+                            Ketentuan</a>
+                    </label>
+                </div>
+
                 <div class="mt-4">
                     <button type="submit" id="submitButton"
                         class="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed">
                         <span id="buttonText">Masuk</span>
-                        <svg id="spinner" class="hidden w-5 h-5 ml-3 text-white animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        <svg id="spinner" class="hidden w-5 h-5 ml-3 text-white animate-spin"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor"
+                                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                            </path>
                         </svg>
                         <span class="hidden ps-3" id="spinner-text">Tunggu sebentar...</span>
                     </button>
@@ -81,8 +114,8 @@
                 </button>
             </div>
             <div class="mt-5 text-center">
-                <p class="text-sm text-gray-600">Belum punya akun?</p>
-                <a href="{{ route('register') }}" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700">Daftar
+                <p class="text-sm text-gray-600">Sudah punya akun?</p>
+                <a href="{{ route('login') }}" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700">Masuk
                     sekarang</a>
             </div>
         </div>

@@ -9,12 +9,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.22.0/tabler-icons.css"
         integrity="sha512-pMUnRIOLdDaUxn5A+5iKAfTyUQ0bFZxc+OYOoGhSFvlvqmIsM3oqR1VDYxJdt0dmBHEb1BSV+oZ/MqEHuw0c0Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
     <div class="bg-white">
-        <div class="relative px-6 pt-3 isolate lg:px-8">
+        <div class="relative px-6 isolate pt-14 lg:px-8">
             <!-- Background dengan z-index lebih rendah -->
             <div class="absolute inset-x-0 overflow-hidden -top-40 -z-20 transform-gpu blur-3xl sm:-top-80"
                 aria-hidden="true">
@@ -39,6 +40,8 @@
               );">
                 </div>
             </div>
+
+            <x-navigation />
             @yield('content')
         </div>
     </div>
