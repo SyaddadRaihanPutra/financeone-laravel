@@ -1,5 +1,5 @@
 @extends('layouts.custom-layout')
-
+@section('title', 'Dashboard')
 @section('content')
     <div class="container pt-12 mx-auto">
         <h1 class="pt-8 text-lg font-light">Selamat @if (now()->setTimezone('Asia/Jakarta')->hour >= 0 && now()->setTimezone('Asia/Jakarta')->hour < 12)
@@ -16,7 +16,7 @@
         <div class="p-5 mt-5 transition-all bg-white shadow-lg rounded-xl hover:shadow-xl">
             <div class="p-3 bg-slate-100 rounded-xl">
                 <p class="text-lg font-semibold text-gray-600">Total saldo</p>
-                <p class="text-2xl font-semibold text-slate-900">Rp2.333.333</p>
+                <p class="text-2xl font-semibold text-slate-900">Rp {{ number_format($totalBalance, 0, ',', '.') }}</p>
             </div>
             <div class="flex gap-2 mt-3">
                 <div class="inline-block px-2 py-1 rounded-full bg-slate-100">
@@ -35,7 +35,7 @@
             <div class="p-4 transition-all bg-white shadow-lg ring-1 ring-gray-300 rounded-xl hover:shadow-xl">
                 <h1>Total Income</h1>
                 <h1 class="pt-3 text-2xl font-semibold text-green-600">
-                    Rp N/A
+                    Rp {{ number_format($totalIncome, 0, ',', '.') ?? 'N/A' }}
                     <div class="pt-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -50,7 +50,7 @@
             <div class="p-4 transition-all bg-white shadow-lg ring-1 ring-gray-300 rounded-xl hover:shadow-xl">
                 <h1>Total Expense</h1>
                 <h1 class="pt-3 text-2xl font-semibold text-red-600">
-                    Rp n/A
+                    Rp {{ number_format($totalExpense, 0, ',', '.') ?? 'N/A' }}
                     <div class="pt-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

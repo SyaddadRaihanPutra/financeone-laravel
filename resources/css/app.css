@@ -2,5 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 [x-cloak]{display:none}
-@font-face{font-family:Maison;src:url(~font/MaisonNueuThin.otf);font-weight:100;font-style:normal}
 * {font-family: Maison, sans-serif;}

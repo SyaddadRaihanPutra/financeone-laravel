@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\BudgetController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 
@@ -19,5 +23,11 @@ Route::get('/test-conn', function () {
 Route::view('/', 'home')->name('home');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
-    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::resource('transactions', TransactionController::class);
+    Route::resource('budgets', BudgetController::class);
+
+    Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
+    Route::post('reports/generate', [ReportController::class, 'generate'])->name('reports.generate');
+    Route::get('reports/{report}', [ReportController::class, 'show'])->name('reports.show');
 });
