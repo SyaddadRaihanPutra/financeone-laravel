@@ -1,46 +1,53 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta name="dicoding:email" content="putrasyaddad@gmail.com">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+<head>
+    <meta name="dicoding:email" content="putrasyaddad@gmail.com">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.22.0/tabler-icons.css"
+        integrity="sha512-pMUnRIOLdDaUxn5A+5iKAfTyUQ0bFZxc+OYOoGhSFvlvqmIsM3oqR1VDYxJdt0dmBHEb1BSV+oZ/MqEHuw0c0Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-        <!-- Styles -->
-        @livewireStyles
-    </head>
-    <body class="font-sans antialiased">
-        <x-banner />
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
+    <!-- Styles -->
+    @livewireStyles
+</head>
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+<body class="font-sans antialiased">
+    <x-banner />
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
-        </div>
+    <div class="min-h-screen bg-gray-100">
+        @livewire('navigation-menu')
 
-        @stack('modals')
+        <!-- Page Heading -->
+        @if (isset($header))
+            <header class="bg-white shadow">
+                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
 
-        @livewireScripts
-    </body>
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
+
+    <x-footer />
+    @stack('modals')
+
+    @livewireScripts
+</body>
+
 </html>

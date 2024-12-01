@@ -230,7 +230,7 @@
     @else
         {{-- NAVIGASI DI LANDING PAGE --}}
         <nav id="main-nav"
-            class="flex items-center justify-between p-4 transition-all duration-300 shadow-lg lg:px-8 rounded-2xl backdrop-blur-lg bg-white/80"
+            class="flex items-center justify-between p-4 transition-all duration-300 shadow-lg lg:px-8 rounded-2xl backdrop-blur-lg bg-white/60"
             aria-label="Global">
             <div class="flex lg:flex-1">
                 <a href="/" class="-m-1.5 p-1.5 flex items-center">
@@ -318,9 +318,9 @@
                     </a>
                 @else
                     <a href="{{ route('login') }}"
-                        class="text-sm font-semibold leading-6 text-gray-900 transition-all hover:bg-white hover:text-indigo-600 hover:ring-indigo-600 hover:ring-2 hover:px-3 hover:py-1 hover:rounded-lg">
+                        class="px-3 py-1 text-sm font-semibold leading-6 text-indigo-600 transition-all rounded-lg bg-indigo-50 ring-indigo-600 ring-2 hover:bg-white hover:text-indigo-600 hover:ring-indigo-600 hover:ring-2 hover:px-3 hover:py-1 hover:rounded-lg group">
                         Masuk
-                        <i class="ti ti-arrow-right"></i>
+                        <i class="transition-transform duration-200 ti ti-arrow-right group-hover:translate-x-1"></i>
                     </a>
                 @endauth
             </div>
@@ -346,11 +346,11 @@
                 let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 if (scrollTop > lastScrollTop) {
                     // Scrolling down
-                    mainNav.classList.add('backdrop-blur-lg');
+                    mainNav.classList.add('backdrop-blur-xl');
                     mainNav.classList.add('bg-transparent');
                 } else {
                     // Scrolling up
-                    mainNav.classList.remove('backdrop-blur-lg');
+                    mainNav.classList.remove('backdrop-blur-xl');
                     mainNav.classList.remove('bg-transparent');
                 }
                 lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
@@ -451,9 +451,10 @@
                             </a>
                         @else
                             <a href="{{ route('login') }}"
-                                class="text-sm font-semibold leading-6 text-gray-900 transition-all hover:bg-white hover:text-indigo-600 hover:ring-indigo-600 hover:ring-2 hover:px-3 hover:py-1 hover:rounded-lg">
+                                class="px-3 py-2 text-sm font-semibold leading-6 text-indigo-600 transition-all rounded-lg bg-indigo-50 ring-indigo-600 ring-2 hover:bg-white hover:text-indigo-600 hover:ring-indigo-600 hover:ring-2 hover:px-3 hover:py-2 hover:rounded-lg group">
                                 Masuk
-                                <i class="ti ti-arrow-right"></i>
+                                <i
+                                    class="transition-transform duration-200 ti ti-arrow-right group-hover:translate-x-1"></i>
                             </a>
                         @endauth
                     </div>
