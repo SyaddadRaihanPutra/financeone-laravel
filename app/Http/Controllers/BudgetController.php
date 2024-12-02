@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Budget;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class BudgetController extends Controller
 {
     public function index()
     {
-        $budgets = auth()->user()->budgets()->latest()->paginate(10);
+        $budgets = auth()->user()->budgets;
+
         return view('budgets.index', compact('budgets'));
     }
+
 
     public function create()
     {
@@ -22,7 +25,8 @@ class BudgetController extends Controller
     {
         $request->validate([
             'amount' => 'required|numeric|min:0',
-            'category' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
         ]);

@@ -37,7 +37,7 @@ return [
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),
-        'redirect' => 'http://localhost:8000/auth/google/callback',
+        'redirect' => 'https://financeone.vercel.app/auth/google/callback',
     ],
 
 ];

@@ -13,6 +13,40 @@ class TransactionController extends Controller
         return view('transactions.index', compact('transactions'));
     }
 
+    public function exportPdf()
+    {
+        $transactions = auth()->user()->transactions()->latest()->get();
+
+        // Load view for the PDF
+        $pdf = \PDF::loadView('transactions.pdf', compact('transactions'));
+
+        // Return the generated PDF as a download
+        return $pdf->download('transactions.pdf');
+    }
+
+    public function show($id)
+    {
+
+        $transaction = Transaction::findOrFail($id);
+
+        return view('transactions.show', compact('transaction'));
+
+    }
+
+    public function getApi()
+    {
+        $userId = auth()->id();
+
+        $transactions = Transaction::where('user_id', $userId)
+            ->latest()
+            ->take(5)
+            ->get(['type', 'amount', 'description', 'date']);
+
+        return response()->json([
+            'transactions' => $transactions,
+        ]);
+    }
+
     public function create()
     {
         return view('transactions.create');

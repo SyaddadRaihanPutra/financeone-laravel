@@ -1,5 +1,5 @@
 <header class="fixed inset-x-0 top-0 z-50 m-4 backdrop-blur-lg rounded-2xl">
-    @if (request()->routeIs(['dashboard', 'transactions.*']))
+    @if (request()->routeIs(['dashboard', 'transactions.*', 'budgets.*', 'profile.*']))
         <nav class="flex items-center justify-between p-4 bg-white shadow-lg lg:px-8 rounded-2xl" aria-label="Global">
             <div class="flex lg:flex-1">
                 <a href="/" class="-m-1.5 p-1.5 flex items-center">
@@ -95,120 +95,7 @@
                     </div>
                 </div>
 
-                <!-- Modal Confirmation -->
-                <div id="confirmation-modal"
-                    class="fixed inset-0 z-50 flex items-center justify-center hidden transition-opacity duration-500 bg-gray-500 bg-opacity-50 opacity-0">
-                    <!-- Modal content -->
-                    <div
-                        class="mx-8 overflow-hidden transition-transform duration-500 transform bg-white rounded-lg shadow-xl sm:max-w-lg sm:w-full">
-                        <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                            <div class="sm:flex sm:items-start">
-                                <div
-                                    class="flex items-center justify-center flex-shrink-0 w-12 h-12 mx-auto bg-red-100 rounded-full sm:mx-0 sm:h-10 sm:w-10">
-                                    <svg class="w-6 h-6 text-red-600" stroke="currentColor" fill="none"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                                    </svg>
-                                </div>
-                                <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                    <h3 class="text-lg font-medium leading-6 text-gray-900">
-                                        Konfirmasi Logout
-                                    </h3>
-                                    <div class="mt-2">
-                                        <p class="text-sm leading-5 text-gray-500">
-                                            Apakah Anda yakin ingin keluar? Semua data Anda akan hilang dan Anda tidak
-                                            dapat
-                                            mengembalikannya lagi.
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Action Buttons -->
-                        <div class="px-4 py-3 bg-gray-50 sm:px-6 sm:flex sm:flex-row-reverse">
-                            <!-- Submit Form (Logout) -->
-                            <span class="flex w-full gap-3 rounded-md shadow-sm sm:ml-3 sm:w-auto">
-                                <form method="POST" action="{{ route('logout') }}" id="logout-form" class="w-full">
-                                    @csrf
-                                    <button type="submit"
-                                        class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md shadow-sm hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red sm:text-sm sm:leading-5">
-                                        Keluar
-                                    </button>
-                                </form><button id="cancel-btn" type="button"
-                                    class="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline sm:text-sm sm:leading-5">
-                                    Batal
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
             </div>
-
-            <script>
-                // Dropdown menu toggle
-                const profileBtn = document.getElementById('profile-btn');
-                const dropdownMenu = document.getElementById('dropdown-menu');
-
-                profileBtn.addEventListener('click', () => {
-                    // Toggle dropdown visibility
-                    dropdownMenu.classList.toggle('hidden');
-                });
-
-                // Close dropdown if clicked outside
-                document.addEventListener('click', (event) => {
-                    if (!profileBtn.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                        dropdownMenu.classList.add('hidden');
-                    }
-                });
-
-                // Modal elements
-                const logoutBtn = document.getElementById('logout-btn');
-                const confirmationModal = document.getElementById('confirmation-modal');
-                const cancelBtn = document.getElementById('cancel-btn');
-
-                // Show the modal with animation
-                logoutBtn.addEventListener('click', () => {
-                    confirmationModal.classList.remove('hidden');
-                    setTimeout(() => {
-                        confirmationModal.classList.remove('opacity-0');
-                        confirmationModal.classList.add('opacity-100');
-                    }, 10); // short delay before animation starts
-                });
-
-                // Hide the modal with animation
-                cancelBtn.addEventListener('click', () => {
-                    confirmationModal.classList.remove('opacity-100');
-                    confirmationModal.classList.add('opacity-0');
-                    setTimeout(() => {
-                        confirmationModal.classList.add('hidden');
-                    }, 500); // after animation ends, hide modal
-                });
-
-                // Close modal if clicked outside
-                document.addEventListener('click', (event) => {
-                    if (!confirmationModal.contains(event.target) && !logoutBtn.contains(event.target)) {
-                        confirmationModal.classList.remove('opacity-100');
-                        confirmationModal.classList.add('opacity-0');
-                        setTimeout(() => {
-                            confirmationModal.classList.add('hidden');
-                        }, 500); // after animation ends, hide modal
-                    }
-                });
-            </script>
-
-            <style>
-                /* Modal Transition */
-                #confirmation-modal {
-                    transition: opacity 0.5s ease-in-out;
-                }
-
-                .transform {
-                    transition: transform 0.5s ease-in-out;
-                }
-            </style>
-
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
                 @auth
                     <form action="{{ route('logout') }}" method="POST">

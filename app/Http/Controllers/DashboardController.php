@@ -10,57 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $userId = auth()->id(); // Mendapatkan ID pengguna yang sedang login
-        // Total income dan expense
-        $totalIncome = Transaction::where('user_id', $userId)
-            ->where('type', 'income')
-            ->sum('amount');
-
-        $totalExpense = Transaction::where('user_id', $userId)
-            ->where('type', 'expense')
-            ->sum('amount');
-
-        // Total balance
-        $totalBalance = $totalIncome - $totalExpense;
-
-        $lineChartData = Transaction::select(
-            DB::raw('MONTH(created_at) as month'),
-            DB::raw('SUM(CASE WHEN type = "income" THEN amount ELSE 0 END) as total_income'),
-            DB::raw('SUM(CASE WHEN type = "expense" THEN amount ELSE 0 END) as total_expense')
-        )
-            ->where('user_id', $userId)
-            ->groupBy('month')
-            ->orderBy('month')
-            ->get()
-            ->map(function ($item) {
-                return [
-                    'month' => $item->month,
-                    'total_income' => $item->total_income,
-                    'total_expense' => $item->total_expense,
-                ];
-            });
-
-        $lineChartData = [
-            'labels' => $lineChartData->pluck('month')->map(function ($month) {
-                return date('F', mktime(0, 0, 0, $month, 10));
-            }),
-            'datasets' => [
-                [
-                    'label' => 'Income',
-                    'data' => $lineChartData->pluck('total_income'),
-                    'borderColor' => '#4CAF50',
-                    'fill' => false,
-                ],
-                [
-                    'label' => 'Expense',
-                    'data' => $lineChartData->pluck('total_expense'),
-                    'borderColor' => '#F44336',
-                    'fill' => false,
-                ],
-            ],
-        ];
-
-        return view('dashboard', compact('totalBalance', 'totalIncome', 'totalExpense', 'lineChartData'));
+        return view('dashboard');
     }
 
     public function getApi()

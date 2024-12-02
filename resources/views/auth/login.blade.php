@@ -54,7 +54,7 @@
             </form>
             <h1 class="mt-3 text-center">atau</h1>
             <div class="mt-4">
-                <a type="button" href="{{ route('google.login') }}"
+                <a type="button" href="{{ route('google.login') }}" id="googleLoginButton"
                     class="inline-flex items-center justify-center w-full py-2 text-sm font-medium text-gray-800 transition-all bg-white border border-transparent rounded-md shadow-sm ring-gray-500 ring-1 hover:bg-white-700 focus:outline-none hover:shadow-xl">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -73,7 +73,12 @@
                             <path d="M1 1h22v22H1z" fill="none" />
                         </svg>
                     </span>
-                    Masuk dengan Google
+                    <span id="googleButtonText">Masuk dengan Google</span>
+                    <svg id="googleSpinner" class="hidden w-5 h-5 ml-3 text-gray-800 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span class="hidden ps-3" id="googleSpinnerText">Tunggu sebentar...</span>
                 </a>
             </div>
             <div class="mt-5 text-center">
@@ -94,6 +99,15 @@
         const spinnerText = document.getElementById('spinner-text');
 
         loginForm.addEventListener('submit', function() {
+            submitButton.disabled = true; // Disable button
+            buttonText.classList.add('hidden'); // Hide button text
+            spinner.classList.remove('hidden'); // Show spinner
+            spinnerText.classList.remove('hidden'); // Show spinner text
+        });
+
+        const googleLoginButton = document.getElementById('googleLoginButton');
+
+        googleLoginButton.addEventListener('click', function() {
             submitButton.disabled = true; // Disable button
             buttonText.classList.add('hidden'); // Hide button text
             spinner.classList.remove('hidden'); // Show spinner
