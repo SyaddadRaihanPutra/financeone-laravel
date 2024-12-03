@@ -32,8 +32,8 @@ class DashboardController extends Controller
         // Ambil data transaksi untuk 7 hari terakhir
         $seriesData = Transaction::select(
             DB::raw('DATE(created_at) as date'),
-            DB::raw('SUM(CASE WHEN type = "income" THEN amount ELSE 0 END) as total_income'),
-            DB::raw('SUM(CASE WHEN type = "expense" THEN amount ELSE 0 END) as total_expense')
+            DB::raw("SUM(CASE WHEN type = 'income' THEN amount ELSE 0 END) as total_income"),
+            DB::raw("SUM(CASE WHEN type = 'expense' THEN amount ELSE 0 END) as total_expense")
         )
             ->where('user_id', $userId)
             ->where('created_at', '>=', now()->subDays(3))  // Menyesuaikan untuk mengambil data 7 hari terakhir
@@ -63,6 +63,17 @@ class DashboardController extends Controller
                 'total_expense' => $existingData ? $existingData['total_expense'] : 0,
             ];
         });
+
+        // Handle jika data yang dicari masih kosong
+        if ($completeData->isEmpty()) {
+            return response()->json([
+                'message' => 'No data available for the specified period.',
+                'totalBalance' => 0,
+                'totalIncome' => 0,
+                'totalExpense' => 0,
+                'seriesData' => [],
+            ]);
+        }
 
         return response()->json([
             'totalBalance' => $totalBalance,

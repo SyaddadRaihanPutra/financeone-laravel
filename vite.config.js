@@ -13,5 +13,8 @@ export default defineConfig({
         alias: {
           '~font' : path.resolve(__dirname,'resources/assets/fonts')
         }
-      }
+      },
+      server: {
+        host: 'https://financeone.vercel.app',
+    }
 });

@@ -3,17 +3,18 @@
 
 <head>
     <meta name="dicoding:email" content="putrasyaddad@gmail.com">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title') | FinanceOne</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.22.0/tabler-icons.css"
         integrity="sha512-pMUnRIOLdDaUxn5A+5iKAfTyUQ0bFZxc+OYOoGhSFvlvqmIsM3oqR1VDYxJdt0dmBHEb1BSV+oZ/MqEHuw0c0Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.0.1/dist/alpine.js" defer></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>

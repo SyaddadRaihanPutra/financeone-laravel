@@ -110,7 +110,7 @@
             const eyeIcon = document.getElementById('eyeIcon');
 
             // Fetch data dynamically
-            fetch('{{ route('dashboard.getApi') }}')
+            fetch('{{ url('/api/api/dashboard') }}')
                 .then(response => response.json())
                 .then(data => {
                     // Update balance, income, and expense
@@ -173,7 +173,7 @@
                 });
 
             // Fetch transaction data dynamically
-            fetch('{{ route('transactions.getApi') }}')
+            fetch('{{ url('/api/api/trasanctions/recent') }}')
                 .then(response => response.json())
                 .then(data => {
                     const transactionsTableBody = document.querySelector('#transactions-table tbody');
