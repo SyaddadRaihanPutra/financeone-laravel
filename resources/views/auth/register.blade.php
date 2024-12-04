@@ -129,7 +129,7 @@
                             <path d="M1 1h22v22H1z" fill="none" />
                         </svg>
                     </span>
-                    <span id="googleButtonText">Masuk dengan Google</span>
+                    <span id="googleButtonText">Daftar dengan Google</span>
                     <svg id="googleSpinner" class="hidden w-5 h-5 ml-3 text-gray-800 animate-spin"
                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
@@ -143,7 +143,7 @@
             </div>
             <div class="mt-5 text-center">
                 <p class="text-sm text-gray-600">Sudah punya akun?</p>
-                <a href="{{ route('login') }}" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700">Daftar
+                <a href="{{ route('login') }}" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700">Masuk
                     sekarang</a>
             </div>
         </div>
