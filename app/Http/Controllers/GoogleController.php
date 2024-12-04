@@ -45,17 +45,21 @@ class GoogleController extends Controller
                 ]);
 
                 if ($user->avatar) {
-                    // Mengunduh gambar profil dari URL
                     $imageContent = file_get_contents($user->avatar);
-
-                    // Menyimpan gambar ke storage lokal (public disk)
                     $imageName = 'profile_' . $newUser->id . '.jpg';
-                    $path = 'profile_photos/' . $imageName;
+                    $path = 'img/profile_photos/' . $imageName;
 
-                    // Simpan gambar ke storage
-                    Storage::disk('public')->put($path, $imageContent);
+                    // Simpan file langsung ke public/img/profile_photos
+                    $storagePath = public_path($path);
 
-                    // Update path foto profil di database
+                    // Pastikan direktori tujuan ada
+                    if (!file_exists(dirname($storagePath))) {
+                        mkdir(dirname($storagePath), 0755, true); // Buat folder jika belum ada
+                    }
+
+                    file_put_contents($storagePath, $imageContent);
+
+                    // Simpan path ke database
                     $newUser->profile_photo_path = $path;
                     $newUser->save();
                 }

@@ -4,9 +4,7 @@
     <div class="container pt-12 mx-auto">
         <div class="p-5 mt-5 transition-all bg-white shadow-lg rounded-xl hover:shadow-xl">
             <h1 class="text-2xl font-bold text-center">Riwayat Transaksi</h1>
-            <a href="{{ route('transactions.export-pdf') }}"
-                class="px-3 py-2 text-sm mt-5 inline-block text-white transition-all transform rounded-md bg-slate-700 hover:bg-slate-800 font-base"><i
-                    class="ti ti-printer"></i> Cetak Laporan</a>
+            
             <div class="overflow-x-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400 scrollbar-track-gray-200"
                 style="-webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: gray-400 gray-200;">
                 <table class="w-full mt-4 border border-gray-200 text-nowrap">
@@ -71,7 +69,7 @@
                 </table>
             </div>
             <div class="mt-4">
-                {{ $transactions->links('pagination::tailwind-custom') }}
+                {{ $transactions->links('pagination::tailwind') }}
             </div>
         </div>
     </div>

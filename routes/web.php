@@ -21,12 +21,13 @@ Route::get('/test-conn', function () {
 
 
 Route::view('/', 'home')->name('home');
+Route::view('/artikel', 'artikel')->name('artikel');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('/transactions/create', [TransactionController::class, 'create'])->name('transactions.create');
-    Route::get('/transactions/export-pdf', [TransactionController::class, 'exportPdf'])->name('transactions.export-pdf');
+    Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
 
     Route::resource('budgets', BudgetController::class);
     Route::get('reports', [ReportController::class, 'index'])->name('reports.index');

@@ -3,6 +3,8 @@
 @section('title', 'Daftar Akun')
 @section('content')
     <div class="max-w-md py-32 mx-auto sm:py-30 lg:py-30">
+        <a href="{{ route('home') }}" class="flex items-center mb-3 text-slate-600">
+            <i class="ti ti-arrow-left"></i> &nbsp;Kembali ke Beranda </a>
         <div class="p-5 bg-white shadow-2xl rounded-xl ring-2 ring-gray-300">
             <h1 class="text-2xl font-bold text-center">Daftar Akun</h1>
             <form action="{{ route('register') }}" method="POST" class="mt-5" id="loginForm">
@@ -12,7 +14,7 @@
                     <input type="text" id="fullname" name="fullname" value="{{ old('fullname') }}"
                         placeholder="Syaddad Raihan Putra"
                         class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                        required /> 
+                        required />
                     @error('fullname')
                         <p class="text-sm text-red-500">{{ $message }}</p>
                     @enderror
@@ -56,7 +58,8 @@
                     <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Kata
                         Sandi</label>
                     <div class="relative">
-                        <input type="password" id="password_confirmation" name="password_confirmation" placeholder="********"
+                        <input type="password" id="password_confirmation" name="password_confirmation"
+                            placeholder="********"
                             class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                             required />
                     </div>
@@ -68,15 +71,31 @@
                 <div>
                     <input type="checkbox" id="remember" class="mr-2 text-indigo-500 rounded-lg focus:ring-indigo-500" />
                     <label for="remember" class="text-sm font-medium text-gray-600">
-                        Saya setuju dengan <a href="#" class="text-indigo-600 hover:text-indigo-700">Syarat dan
-                            Ketentuan</a>
+                        Saya setuju dengan <a href="#" class="text-indigo-600 hover:text-indigo-700"
+                            data-modal-target="#termsModal">Syarat dan Ketentuan</a>
                     </label>
+                </div>
+
+                <!-- Modal -->
+                <div id="termsModal" class="fixed inset-0 z-50 hidden overflow-y-auto transition-opacity duration-300 ease-out bg-black bg-opacity-50">
+                    <div class="flex items-center justify-center min-h-screen px-4">
+                        <div class="relative w-full max-w-lg p-6 transition-transform duration-300 ease-out transform scale-95 bg-white rounded-lg shadow-lg">
+                            <h2 class="mb-4 text-xl font-bold">Syarat dan Ketentuan</h2>
+                            <ul class="text-sm text-gray-700 list-disc list-inside">
+                                <li class="mb-2">FinanceOne memerlukan cookie dan sesi untuk pengalaman terbaik Anda.</li>
+                                <li class="mb-2">FinanceOne tidak bertanggung jawab atas penyalahgunaan data pribadi.</li>
+                                <li class="mb-2">Anda dapat masuk dan mendaftar menggunakan akun Google Anda.</li>
+                            </ul>
+                            <button type="button" class="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-700"
+                                data-modal-close="#termsModal">Tutup</button>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mt-4">
                     <button type="submit" id="submitButton"
                         class="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed">
-                        <span id="buttonText">Masuk</span>
+                        <span id="buttonText">Daftar</span>
                         <svg id="spinner" class="hidden w-5 h-5 ml-3 text-white animate-spin"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
@@ -91,7 +110,7 @@
             </form>
             <h1 class="mt-3 text-center">atau</h1>
             <div class="mt-4">
-                <button type="button"
+                <a type="button" href="{{ route('google.login') }}" id="googleLoginButton"
                     class="inline-flex items-center justify-center w-full py-2 text-sm font-medium text-gray-800 transition-all bg-white border border-transparent rounded-md shadow-sm ring-gray-500 ring-1 hover:bg-white-700 focus:outline-none hover:shadow-xl">
                     <span class="mr-2">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
@@ -110,12 +129,21 @@
                             <path d="M1 1h22v22H1z" fill="none" />
                         </svg>
                     </span>
-                    Masuk dengan Google
-                </button>
+                    <span id="googleButtonText">Masuk dengan Google</span>
+                    <svg id="googleSpinner" class="hidden w-5 h-5 ml-3 text-gray-800 animate-spin"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                            stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                        </path>
+                    </svg>
+                    <span class="hidden ps-3" id="googleSpinnerText">Tunggu sebentar...</span>
+                </a>
             </div>
             <div class="mt-5 text-center">
                 <p class="text-sm text-gray-600">Sudah punya akun?</p>
-                <a href="{{ route('login') }}" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700">Masuk
+                <a href="{{ route('login') }}" class="text-sm font-semibold text-indigo-600 hover:text-indigo-700">Daftar
                     sekarang</a>
             </div>
         </div>
@@ -135,6 +163,22 @@
             buttonText.classList.add('hidden'); // Hide button text
             spinner.classList.remove('hidden'); // Show spinner
             spinnerText.classList.remove('hidden'); // Show spinner text
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modalTarget = document.querySelector('[data-modal-target]');
+            const modalClose = document.querySelector('[data-modal-close]');
+            const termsModal = document.getElementById('termsModal');
+
+            modalTarget.addEventListener('click', function(event) {
+                event.preventDefault();
+                termsModal.classList.remove('hidden');
+            });
+
+            modalClose.addEventListener('click', function() {
+                termsModal.classList.add('hidden');
+            });
         });
     </script>
 @endsection

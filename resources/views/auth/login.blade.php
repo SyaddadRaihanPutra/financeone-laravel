@@ -25,7 +25,7 @@
                             required />
                         <div class="flex items-center justify-between mt-3">
                             <div>
-                                <input type="checkbox" id="remember"
+                                <input type="checkbox" id="remember" name="remember"
                                     class="mr-2 text-indigo-500 rounded-lg focus:ring-indigo-500" />
                                 <label for="remember" class="text-sm font-medium text-gray-600">
                                     Ingat saya
@@ -97,8 +97,25 @@
         const buttonText = document.getElementById('buttonText');
         const spinner = document.getElementById('spinner');
         const spinnerText = document.getElementById('spinner-text');
+        const emailInput = document.getElementById('email');
+        const rememberCheckbox = document.getElementById('remember');
+
+        // Load email from localStorage if it exists
+        document.addEventListener('DOMContentLoaded', function() {
+            const rememberedEmail = localStorage.getItem('rememberedEmail');
+            if (rememberedEmail) {
+                emailInput.value = rememberedEmail;
+                rememberCheckbox.checked = true;
+            }
+        });
 
         loginForm.addEventListener('submit', function() {
+            if (rememberCheckbox.checked) {
+                localStorage.setItem('rememberedEmail', emailInput.value);
+            } else {
+                localStorage.removeItem('rememberedEmail');
+            }
+
             submitButton.disabled = true; // Disable button
             buttonText.classList.add('hidden'); // Hide button text
             spinner.classList.remove('hidden'); // Show spinner

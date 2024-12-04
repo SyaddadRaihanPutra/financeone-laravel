@@ -11,7 +11,7 @@
         integrity="sha512-pMUnRIOLdDaUxn5A+5iKAfTyUQ0bFZxc+OYOoGhSFvlvqmIsM3oqR1VDYxJdt0dmBHEb1BSV+oZ/MqEHuw0c0Q=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Finance One') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -25,20 +25,10 @@
 </head>
 
 <body class="font-sans antialiased">
-    <x-banner />
+    {{-- <x-banner /> --}}
 
     <div class="min-h-screen bg-gray-100">
         @livewire('navigation-menu')
-
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header class="bg-white shadow">
-                <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
-
         <!-- Page Content -->
         <main>
             {{ $slot }}
@@ -46,6 +36,7 @@
     </div>
 
     <x-footer />
+    <script src="{{ asset('assets/js/main.js') }}"></script>
     @stack('modals')
 
     @livewireScripts

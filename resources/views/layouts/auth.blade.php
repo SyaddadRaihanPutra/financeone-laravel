@@ -42,6 +42,7 @@
             @yield('content')
         </div>
     </div>
+    <x-footer/>
     @yield('script')
 </body>
 

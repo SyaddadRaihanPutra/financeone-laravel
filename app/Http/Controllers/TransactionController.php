@@ -13,17 +13,6 @@ class TransactionController extends Controller
         return view('transactions.index', compact('transactions'));
     }
 
-    public function exportPdf()
-    {
-        $transactions = auth()->user()->transactions()->latest()->get();
-
-        // Load view for the PDF
-        $pdf = \PDF::loadView('transactions.pdf', compact('transactions'));
-
-        // Return the generated PDF as a download
-        return $pdf->download('transactions.pdf');
-    }
-
     public function show($id)
     {
 

@@ -65,7 +65,7 @@
                 <div class="flex items-center cursor-pointer" id="profile-btn">
                     @auth
                         <img id="profile-image"
-                            src="{{ auth()->user()->profile_photo_path ? Storage::url(auth()->user()->profile_photo_path) : Auth::user()->profile_photo_url }}"
+                            src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->fullname) }}&color=7F9CF5&background=EBF4FF"
                             alt="Profile Image" class="w-8 h-8 rounded-full" />
                         <i class="ml-1 transition-transform duration-200 ti ti-chevron-down" id="arrow-icon"></i>
                     @else
@@ -95,6 +95,47 @@
                     </div>
                 </div>
 
+            </div>
+            <div class="items-center hidden space-x-8 lg:flex">
+                <div class="relative group">
+                    <a href="{{ route('dashboard') }}"
+                        class="relative flex flex-col items-center justify-center text-sm font-medium transition-all duration-300 transform hover:text-indigo-500 hover:scale-110 {{ request()->routeIs('dashboard') ? 'text-indigo-500' : 'text-gray-400' }}">
+                        <i class="text-2xl ti ti-home"></i>
+                        Dashboard
+                    </a>
+                </div>
+
+                <div class="relative group">
+                    <a href="{{ route('budgets.index') }}"
+                        class="relative flex flex-col items-center justify-center text-sm font-medium transition-all duration-300 transform hover:text-indigo-500 hover:scale-110 {{ request()->routeIs('budgets.index') ? 'text-indigo-500' : 'text-gray-400' }}">
+                        <i class="text-2xl ti ti-cash-register"></i>
+                        Anggaran
+                    </a>
+                </div>
+
+                <div class="relative group">
+                    <a href="{{ route('transactions.create') }}"
+                        class="relative flex flex-col items-center justify-center text-sm font-medium transition-all duration-300 transform hover:text-indigo-500 hover:scale-110 {{ request()->routeIs('transactions.create') ? 'text-indigo-500' : 'text-gray-400' }}">
+                        <i class="text-2xl ti ti-copy-plus"></i>
+                        Buat Transaksi
+                    </a>
+                </div>
+
+                <div class="relative group">
+                    <a href="{{ route('transactions.index') }}"
+                        class="relative flex flex-col items-center justify-center text-sm font-medium transition-all duration-300 transform hover:text-indigo-500 hover:scale-110 {{ request()->routeIs('transactions.index') ? 'text-indigo-500' : 'text-gray-400' }}">
+                        <i class="text-2xl ti ti-history"></i>
+                        Riwayat Transaksi
+                    </a>
+                </div>
+
+                <div class="relative group">
+                    <a href="{{ route('profile.show') }}"
+                        class="relative flex flex-col items-center justify-center text-sm font-medium transition-all duration-300 transform hover:text-indigo-500 hover:scale-110 {{ request()->routeIs('profile.show') ? 'text-indigo-500' : 'text-gray-400' }}">
+                        <i class="text-2xl ti ti-user"></i>
+                        Profil
+                    </a>
+                </div>
             </div>
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
                 @auth
@@ -181,24 +222,18 @@
 
             <div class="items-center hidden lg:flex lg:flex-1 lg:justify-end">
                 <div class="hidden gap-4 lg:flex me-5">
-                    <a href="#"
-                        class="text-base font-semibold transition-all duration-300 hover:text-indigo-600">
-                        Fitur
-                    </a>
-                    <a href="#"
-                        class="text-base font-semibold transition-all duration-300 hover:text-indigo-600">
-                        Artikel
-                    </a>
-                    <a href="#"
-                        class="text-base font-semibold transition-all duration-300 hover:text-indigo-600">
-                        F.A.Q
-                    </a>
+                    <a href="{{ request()->routeIs('home') ? '#features' : url('/') . '#features' }}"
+                        class="block px-3 py-2 text-xl font-semibold leading-7 text-gray-900 transition-all duration-300 rounded-lg w-100 hover:bg-slate-100">Fitur</a>
+                    <a href="{{ route('artikel') }}"
+                        class="block px-3 py-2 text-xl font-semibold leading-7 text-gray-900 transition-all duration-300 rounded-lg w-100 hover:bg-slate-100">Artikel</a>
+                    <a href="{{ request()->routeIs('home') ? '#faq' : url('/') . '#faq' }}"
+                        class="block px-3 py-2 text-xl font-semibold leading-7 text-gray-900 transition-all duration-300 rounded-lg w-100 hover:bg-slate-100">F.A.Q</a>
                 </div>
                 @auth
                     <a href="{{ route('dashboard') }}">
                         <div class="flex items-center px-2 py-1 rounded-full bg-indigo-50 ring-2 ring-indigo-600">
                             <img id="profile-image"
-                                src="{{ auth()->user()->profile_photo_path ? Storage::url(auth()->user()->profile_photo_path) : Auth::user()->profile_photo_url }}"
+                                src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->fullname) }}&color=7F9CF5&background=EBF4FF"
                                 alt="Profile Image" class="w-8 h-8 rounded-full" />
                             <span class="font-bold ms-2">{{ auth()->user()->fullname }}</span>
                         </div>
@@ -319,19 +354,19 @@
                 </div>
                 <div class="flex flex-col items-center justify-center mx-3 w-100">
                     <div class="space-y-2 text-center" style="width: 100%;">
-                        <a href="#"
+                        <a href="{{ request()->routeIs('home') ? '#features' : url('/') . '#features' }}"
                             class="block px-3 py-2 text-xl font-semibold leading-7 text-gray-900 transition-all duration-300 rounded-lg w-100 hover:bg-slate-100">Fitur</a>
-                        <a href="#"
-                            class="block px-3 py-2 text-xl font-semibold leading-7 text-gray-900 transition-all duration-300 rounded-lg w-100 hover:bg-slate-100">Tentang</a>
-                        <a href="#"
-                            class="block px-3 py-2 text-xl font-semibold leading-7 text-gray-900 transition-all duration-300 rounded-lg w-100 hover:bg-slate-100">Blog</a>
+                        <a href="{{ route('artikel') }}"
+                            class="block px-3 py-2 text-xl font-semibold leading-7 text-gray-900 transition-all duration-300 rounded-lg w-100 hover:bg-slate-100">Artikel</a>
+                        <a href="{{ request()->routeIs('home') ? '#faq' : url('/') . '#faq' }}"
+                            class="block px-3 py-2 text-xl font-semibold leading-7 text-gray-900 transition-all duration-300 rounded-lg w-100 hover:bg-slate-100">F.A.Q</a>
                     </div>
                     <div class="py-6">
                         @auth
                             <a href="{{ route('dashboard') }}">
                                 <div class="flex items-center px-2 py-1 rounded-full bg-indigo-50 ring-2 ring-indigo-600">
                                     <img id="profile-image"
-                                        src="{{ auth()->user()->profile_photo_path ? Storage::url(auth()->user()->profile_photo_path) : Auth::user()->profile_photo_url }}"
+                                        src="https://ui-avatars.com/api/?name={{ urlencode(auth()->user()->fullname) }}&color=7F9CF5&background=EBF4FF"
                                         alt="Profile Image" class="w-8 h-8 rounded-full" />
                                     <span class="font-bold ms-2">{{ auth()->user()->fullname }}</span>
                                 </div>

@@ -1,10 +1,10 @@
-<x-form-section submit="updateProfileInformation">
+<x-form-section submit="updateProfileInformation" class="mt-24">
     <x-slot name="title">
-        {{ __('Profile Information') }}
+        {{ __('Informasi profil') }}
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Update your account\'s profile information and email address.') }}
+        {{ __('Perbarui informasi profil dan alamat email akun Anda.') }}
     </x-slot>
 
     <x-slot name="form">
@@ -39,12 +39,12 @@
                 </div>
 
                 <x-secondary-button class="mt-2 me-2" type="button" x-on:click.prevent="$refs.photo.click()">
-                    {{ __('Select A New Photo') }}
+                    {{ __('Pilih Foto Baru') }}
                 </x-secondary-button>
 
                 @if ($this->user->profile_photo_path)
                     <x-secondary-button type="button" class="mt-2" wire:click="deleteProfilePhoto">
-                        {{ __('Remove Photo') }}
+                        {{ __('Hapus Foto') }}
                     </x-secondary-button>
                 @endif
 
@@ -54,29 +54,29 @@
 
         <!-- Name -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="fullname" value="{{ __('Full Name') }}" />
+            <x-label for="fullname" value="{{ __('Nama lengkap') }}" />
             <x-input id="fullname" type="text" class="block w-full mt-1" wire:model="state.fullname" required autocomplete="fullname" />
             <x-input-error for="fullname" class="mt-2" />
         </div>
 
         <!-- Email -->
         <div class="col-span-6 sm:col-span-4">
-            <x-label for="email" value="{{ __('Email') }}" />
+            <x-label for="email" value="{{ __('Alamat surel') }}" />
             <x-input id="email" type="email" class="block w-full mt-1" wire:model="state.email" required autocomplete="username" />
             <x-input-error for="email" class="mt-2" />
 
             @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::emailVerification()) && ! $this->user->hasVerifiedEmail())
                 <p class="mt-2 text-sm">
-                    {{ __('Your email address is unverified.') }}
+                    {{ __('Alamat email Anda belum diverifikasi.') }}
 
                     <button type="button" class="text-sm text-gray-600 underline rounded-md hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" wire:click.prevent="sendEmailVerification">
-                        {{ __('Click here to re-send the verification email.') }}
+                        {{ __('Klik di sini untuk mengirim ulang email verifikasi.') }}
                     </button>
                 </p>
 
                 @if ($this->verificationLinkSent)
                     <p class="mt-2 text-sm font-medium text-green-600">
-                        {{ __('A new verification link has been sent to your email address.') }}
+                        {{ __('Tautan verifikasi baru telah dikirim ke alamat email Anda.') }}
                     </p>
                 @endif
             @endif
@@ -85,11 +85,11 @@
 
     <x-slot name="actions">
         <x-action-message class="me-3" on="saved">
-            {{ __('Saved.') }}
+            {{ __('Berhasil menyimpan.') }}
         </x-action-message>
 
         <x-button wire:loading.attr="disabled" wire:target="photo">
-            {{ __('Save') }}
+            {{ __('Simpan') }}
         </x-button>
     </x-slot>
 </x-form-section>

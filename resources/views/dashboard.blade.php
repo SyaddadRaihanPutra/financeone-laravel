@@ -1,9 +1,9 @@
 @extends('layouts.custom-layout')
 @section('title', 'Dashboard')
 @section('content')
-    <div class="container pt-12 mx-auto pb-40">
+    <div class="container pt-12 pb-40 mx-auto">
         @if (session('success'))
-            <div class="bg-green-500 text-white font-bold px-4 py-2 rounded-md shadow-md">
+            <div class="px-4 py-2 font-bold text-white bg-green-500 rounded-md shadow-md">
                 {{ session('success') }}
             </div>
         @endif
@@ -66,8 +66,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="grid grid-cols-1 gap-6 mt-7 lg:grid-cols-2">
             <div class="p-5 bg-white shadow rounded-xl ring-1 ring-slate-100">
                 <div id="loading-transactions" class="flex items-center justify-center h-40 bg-white">
                     <div class="w-12 h-12 border-t-4 border-indigo-600 rounded-full animate-spin"></div>
@@ -77,7 +75,7 @@
                     <h2 class="mb-1 text-lg font-semibold">Riwayat transaksi anda</h2>
                     <p class="mb-4 text-sm text-gray-600">Menampilkan 5 transaksi terakhir anda.</p>
                     <div class="overflow-x-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-gray-400 scrollbar-track-gray-200"
-                    style="-webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: gray-400 gray-200;">
+                        style="-webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: gray-400 gray-200;">
                         <table class="w-full mt-4 border border-gray-200 text-nowrap" id="transactions-table">
                             <thead>
                                 <tr class="text-sm font-medium text-white bg-gradient-to-r from-indigo-600 to-blue-500">
@@ -231,7 +229,8 @@
 
                             const amountCell = document.createElement('td');
                             amountCell.classList.add('px-6', 'py-2', 'font-semibold');
-                            amountCell.textContent = `Rp ${parseInt(transaction.amount).toLocaleString()}`;
+                            amountCell.textContent =
+                                `Rp ${parseInt(transaction.amount).toLocaleString()}`;
                             row.appendChild(amountCell);
 
                             const descriptionCell = document.createElement('td');
